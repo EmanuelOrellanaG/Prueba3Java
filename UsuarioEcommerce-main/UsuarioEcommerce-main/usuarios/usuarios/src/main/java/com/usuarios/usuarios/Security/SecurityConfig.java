@@ -29,6 +29,7 @@ public class SecurityConfig {
                                 "/auth/**"
                         ).permitAll()
                         .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
+
                         .anyRequest().authenticated()
                 )
 
