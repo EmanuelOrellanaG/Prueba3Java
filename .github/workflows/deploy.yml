@@ -19,11 +19,14 @@ jobs:
           java-version: '21'
 
       - name: Compilar proyecto con Maven
+        # Nos movemos a la carpeta exacta donde está el pom.xml
+        working-directory: ./UsuarioEcommerce-main/UsuarioEcommerce-main/usuarios/usuarios
         run: mvn clean package -DskipTests
 
       - name: Desplegar en AWS Lambda
+        # Nos movemos a la misma carpeta para buscar el archivo .jar generado
+        working-directory: ./UsuarioEcommerce-main/UsuarioEcommerce-main/usuarios/usuarios
         run: |
-          # Busca el archivo .jar generado en la carpeta target automáticamente
           JAR_FILE=$(ls target/*.jar | head -n 1)
           echo "Subiendo archivo: $JAR_FILE"
           
