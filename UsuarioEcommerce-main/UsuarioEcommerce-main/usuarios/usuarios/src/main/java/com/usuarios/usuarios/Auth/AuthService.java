@@ -1,5 +1,6 @@
 package com.usuarios.usuarios.Auth;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import com.usuarios.usuarios.UsuariosEntity.UsuariosEntity;
 import com.usuarios.usuarios.UsuariosRepository.UsuarioRepository;
 import com.usuarios.usuarios.Security.JWTService;
