@@ -12,10 +12,16 @@ jobs:
     steps:
       - name: Actualizar código
         run: |
-          cd ~/Prueba3Java
+          cd /home/ubuntu/Prueba3Java
           git pull origin main
+
+      - name: Verificar Docker Compose
+        run: |
+          cd /home/ubuntu/Prueba3Java
+          ls -l docker-compose.yml
+          docker compose config
 
       - name: Reconstruir y levantar usuarios
         run: |
-          cd ~/Prueba3Java
+          cd /home/ubuntu/Prueba3Java
           docker compose up -d --build usuarios
