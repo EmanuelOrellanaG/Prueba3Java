@@ -23,4 +23,9 @@ public class UsuariosController {
     public List<UsuariosEntity> listar(){
         return service.listar();
     }
+
+    @GetMapping("/hola")
+    public String hola (){
+        return "hola";
+    }
 }
