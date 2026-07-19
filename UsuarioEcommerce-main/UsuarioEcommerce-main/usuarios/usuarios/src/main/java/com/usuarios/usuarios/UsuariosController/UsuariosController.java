@@ -33,4 +33,9 @@ public class UsuariosController {
     public String chao (){
         return "chao";
     }
+
+    @GetMapping("/adios")
+    public String chaaao (){
+        return "chaao";
+    }
 }
