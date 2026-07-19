@@ -35,38 +35,6 @@ services:
       - ecommerce-network
 
 
-  productos:
-    build:
-      context: ./ProductoEcommerce-main/ProductoEcommerce-main/Prueba2Java
-
-    container_name: productos-service
-
-    ports:
-      - "8082:8082"
-
-    depends_on:
-      - mysql
-
-    networks:
-      - ecommerce-network
-
-
-  pedidos:
-    build:
-      context: ./PedidoEcommerce-main/PedidoEcommerce-main/pedidos/pedidos
-
-    container_name: pedidos-service
-
-    ports:
-      - "8083:8083"
-
-    depends_on:
-      - mysql
-
-    networks:
-      - ecommerce-network
-
-
 volumes:
   mysql_data:
 
