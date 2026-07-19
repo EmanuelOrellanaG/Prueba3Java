@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted  # Usa tu servidor EC2 Ubuntu
+    runs-on: self-hosted
 
     steps:
       - name: Descargar codigo del repositorio
