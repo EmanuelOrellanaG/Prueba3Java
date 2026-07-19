@@ -1,0 +1,21 @@
+name: Deploy Usuarios
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Actualizar código
+        run: |
+          cd ~/Prueba3Java
+          git pull origin main
+
+      - name: Reconstruir y levantar usuarios
+        run: |
+          cd ~/Prueba3Java
+          docker compose up -d --build usuarios
