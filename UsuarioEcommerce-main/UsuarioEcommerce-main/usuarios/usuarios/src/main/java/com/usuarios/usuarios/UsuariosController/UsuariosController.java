@@ -19,7 +19,7 @@ public class UsuariosController {
         return service.guardar(dto);
     }
 
-    @GetMapping
+    @GetMapping("/obtener")
     public List<UsuariosEntity> listar(){
         return service.listar();
     }
