@@ -25,25 +25,23 @@ jobs:
       - name: Crear paquete ZIP optimizado para AWS Lambda
         working-directory: ./UsuarioEcommerce-main/UsuarioEcommerce-main/usuarios/usuarios
         run: |
-          # Nos movemos a la carpeta de salida de Maven
           cd target
-          
-          # Descomprimimos el JAR pesado en una carpeta temporal
           mkdir -p lambda_package
           unzip -q *.jar -d lambda_package/
-          
-          # Entramos a la carpeta y comprimimos todo el contenido en un archivo .zip limpio
           cd lambda_package
           zip -r ../lambda_deploy.zip .
-          
-          echo "¡Archivo ZIP creado con éxito para AWS Lambda!"
 
-      - name: Desplegar en AWS Lambda
+      - name: Subir a Amazon S3 y Actualizar Lambda
         working-directory: ./UsuarioEcommerce-main/UsuarioEcommerce-main/usuarios/usuarios
         run: |
-          echo "Subiendo archivo comprimido a AWS Lambda..."
+          BUCKET_NAME="bucket-deploy-usuarios-emanuel"
           
+          echo "1. Subiendo el archivo ZIP pesado a Amazon S3..."
+          aws s3 cp target/lambda_deploy.zip s3://$BUCKET_NAME/lambda_deploy.zip --region us-east-1
+          
+          echo "2. Actualizando la Lambda apuntando al archivo en S3..."
           aws lambda update-function-code \
             --function-name deploy-usuarios-lambda \
-            --zip-file fileb://target/lambda_deploy.zip \
+            --s3-bucket $BUCKET_NAME \
+            --s3-key lambda_deploy.zip \
             --region us-east-1
