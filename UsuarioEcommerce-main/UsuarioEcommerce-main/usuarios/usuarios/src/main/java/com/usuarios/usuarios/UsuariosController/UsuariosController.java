@@ -28,4 +28,9 @@ public class UsuariosController {
     public String hola (){
         return "hola";
     }
+
+    @GetMapping("/chao")
+    public String chao (){
+        return "chao";
+    }
 }
