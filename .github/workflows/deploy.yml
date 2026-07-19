@@ -19,18 +19,31 @@ jobs:
           java-version: '21'
 
       - name: Compilar proyecto con Maven
-        # Nos movemos a la carpeta exacta donde está el pom.xml
         working-directory: ./UsuarioEcommerce-main/UsuarioEcommerce-main/usuarios/usuarios
         run: mvn clean package -DskipTests
 
-      - name: Desplegar en AWS Lambda
-        # Nos movemos a la misma carpeta para buscar el archivo .jar generado
+      - name: Crear paquete ZIP optimizado para AWS Lambda
         working-directory: ./UsuarioEcommerce-main/UsuarioEcommerce-main/usuarios/usuarios
         run: |
-          JAR_FILE=$(ls target/*.jar | head -n 1)
-          echo "Subiendo archivo: $JAR_FILE"
+          # Nos movemos a la carpeta de salida de Maven
+          cd target
+          
+          # Descomprimimos el JAR pesado en una carpeta temporal
+          mkdir -p lambda_package
+          unzip -q *.jar -d lambda_package/
+          
+          # Entramos a la carpeta y comprimimos todo el contenido en un archivo .zip limpio
+          cd lambda_package
+          zip -r ../lambda_deploy.zip .
+          
+          echo "¡Archivo ZIP creado con éxito para AWS Lambda!"
+
+      - name: Desplegar en AWS Lambda
+        working-directory: ./UsuarioEcommerce-main/UsuarioEcommerce-main/usuarios/usuarios
+        run: |
+          echo "Subiendo archivo comprimido a AWS Lambda..."
           
           aws lambda update-function-code \
             --function-name deploy-usuarios-lambda \
-            --zip-file fileb://$JAR_FILE \
+            --zip-file fileb://target/lambda_deploy.zip \
             --region us-east-1
