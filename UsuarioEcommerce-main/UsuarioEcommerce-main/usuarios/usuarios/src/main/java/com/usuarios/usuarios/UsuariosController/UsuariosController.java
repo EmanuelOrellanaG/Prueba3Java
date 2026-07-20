@@ -38,4 +38,9 @@ public class UsuariosController {
     public String chaaao (){
         return "chaao";
     }
+
+    @GetMapping("/quetal")
+    public String quetal (){
+        return "chaao";
+    }
 }
