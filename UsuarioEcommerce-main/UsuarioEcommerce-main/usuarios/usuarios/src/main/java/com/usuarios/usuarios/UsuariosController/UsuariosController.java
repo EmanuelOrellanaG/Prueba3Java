@@ -24,4 +24,9 @@ public class UsuariosController {
         return service.listar();
     }
 
+    @GetMapping("/hola")
+    public String hola(){
+        return "hola";
+    }
+
 }
