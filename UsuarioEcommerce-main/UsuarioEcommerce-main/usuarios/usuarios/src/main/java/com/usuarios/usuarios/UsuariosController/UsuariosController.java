@@ -24,23 +24,4 @@ public class UsuariosController {
         return service.listar();
     }
 
-    @GetMapping("/hola")
-    public String hola (){
-        return "hola";
-    }
-
-    @GetMapping("/chao")
-    public String chao (){
-        return "chao";
-    }
-
-    @GetMapping("/adios")
-    public String chaaao (){
-        return "chaao";
-    }
-
-    @GetMapping("/quetal")
-    public String quetal (){
-        return "chaao";
-    }
 }
